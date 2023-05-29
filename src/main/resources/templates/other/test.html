@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Quick Start - Layui</title>
+    <link href="/cdn.staticfile.org/layui/2.8.0/css/layui.css" rel="stylesheet">
+</head>
+<body>
+<!-- HTML Content -->
+<button type="button" id="123" onclick="myBtn()">12312331</button>
+<script src="/cdn.staticfile.org/layui/2.8.0/layui.js"></script>
+<script>
+    function myBtn(){
+        layui.use(function (){
+            var layer = layui.layer;
+            // Welcome
+            layer.msg('Hello World', {icon: 6});
+        });
+    }
+    // Usage
+
+</script>
+</body>
+</html>

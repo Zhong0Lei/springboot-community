@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>chat</title>
+</head>
+<style>
+    html, body{
+        height: 100%;
+    }
+    *{
+        padding: 0;
+        margin: 0;
+    }
+    .chat_commento{
+        /*width: 450px;*/
+        height: 100%;
+        margin: auto;
+        border-radius: 10px;
+        border: 2px solid #f4f5f7;
+    }
+    .clearfix::after{
+        content: "";
+        display: block;
+        clear: both;
+        width: 0;
+        height: 0;
+        line-height: 0;
+        visibility: hidden;
+    }
+    /* top */
+    .chat_top{
+        width: 100%;
+        height: 50px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        padding-left: 20px;
+        font-size: 20px;
+        line-height: 50px;
+        box-sizing: border-box;
+        font-weight: 550;
+        border-width: 0px;
+    }
+    /* middle */
+    /* 左边 */
+    .chat_middle{
+        /*width: 450px;*/
+        height: 60%;
+        position: relative;
+        box-sizing: border-box;
+        overflow: auto;
+        border-width: 0px;
+    }
+    .chat_left{
+        width: 100%;
+        /*height: 120px;*/
+        /*position: absolute;*/
+        margin-top: 20px;
+    }
+    .chat_left_item_1{
+        width: 50px;
+        /*height: 50px;*/
+        background-color: #4459AB;
+        float: left;
+        margin-top: 10px;
+        margin-left: 10px;
+        margin-right: 10px;
+        text-align: center;
+        line-height: 50px;
+        color: white;
+        border-radius: 25px;
+    }
+    .chat_left_item_2{
+        width: 55%;
+        /*height: 100px;*/
+        /*position: absolute;*/
+        float: left;
+        margin-top: 10px;
+    }
+    .chat_left_item_2 .chat_left_chat{
+        float: left;
+    }
+    .chat_left_item_2 .chat_left_content{
+        padding: 15px;
+        margin-top: 10px;
+        background-color: #f4f5f7;
+        display: inline-block;
+        border-radius: 10px;
+        border-top-left-radius: 0px;
+    }
+    /* 右边 */
+    .chat_right{
+        width: 100%;
+        /*height: 120px;*/
+        margin-top: 20px;
+    }
+    .chat_right_item_1{
+        width: 50px;
+        /*height: 50px;*/
+        /*position: absolute;*/
+        background-color: #4459AB;
+        float: right;
+        margin-top: 10px;
+        margin-left: 10px;
+        margin-right: 10px;
+        text-align: center;
+        line-height: 50px;
+        color: white;
+        border-radius: 25px;
+    }
+    .chat_right_item_2{
+        width: 55%;
+        /*height: 100px;*/
+        /*position: absolute;*/
+        float: right;
+        margin-top: 10px;
+    }
+    .chat_right_time{
+        width: 100%;
+        text-align: right;
+    }
+    .chat_right_content{
+        float: right;
+        padding: 15px;
+        border-radius: 10px;
+        margin-top: 10px;
+        border-top-right-radius: 0px;
+        background-color: #4F7cff;
+        color: white;
+    }
+    /* foot */
+    .chat_foot{
+        /*width: 450px;*/
+        height: 30%;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        position: relative;
+    }
+    .chat_context{
+        width: 100%;
+        height: 100%;
+        font-size: 17px;
+        box-sizing: border-box;
+        outline: none;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        border-width: 0px;
+        padding: 16px;
+    }
+    .chat_commit{
+        width: 80px;
+        height: 30px;
+        color: white;
+        background-color: #4F7cff;
+        line-height: 30px;
+        text-align: center;
+        border-radius: 5px;
+        position: absolute;
+        right: 10px;
+        bottom: 20px;
+        margin-right: 10px;
+    }
+    .chat_context{
+        resize: none;
+    }
+    .chat_context::placeholder{
+        color: black;
+        font-weight: 500k;
+    }
+    .line{
+        width: 100%;
+        border-top: 1px;
+        border-color: #f4f5f7;
+        border-style: solid;
+    }
+</style>
+<body>
+<!-- entry -->
+<div class="chat_commento">
+    <!-- top -->
+    <div class="chat_top">
+        <a th:href="@{/index}" style="float:left;"> 返回论坛主页 </a>
+        <p style="text-align: center">      ChatGPT聊天机器人         </p>
+    </div>
+    <!-- line -->
+    <div class="line"></div>
+    <!-- middle -->
+    <div class="chat_middle" id="chat_middle_item">
+        <!-- 左边 -->
+        <div class="chat_left clearfix">
+            <div class="chat_left_item_1 ">chatGPT</div>
+            <div class="chat_left_item_2">
+                <div class="chat_time" th:text="${#dates.format(#dates.createNow(), 'HH:mm')}"></div>
+                <div class="chat_left_content">
+                    你好，我是chatGPT机器人。
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- line -->
+    <div class="line"></div>
+    <!-- foot -->
+        <div class="chat_foot" id="check1">
+            <!-- context -->
+            <textarea class="chat_context" id="chat_context_item" cols="30" rows="10" placeholder="请输入"></textarea>
+            <div class="chat_commit" id="button">发送</div>
+        </div>
+</div>
+<script>
+    // 成功发送
+    var send_message=document.getElementById("chat_middle_item");
+    var domBtm=document.getElementById("button");
+    // 发送内容
+    var message=document.getElementById("chat_context_item");
+
+    var check1 = document.getElementById("check1");
+
+    check1.addEventListener("keyup",function (event){
+        event.preventDefault();
+        if(event.keyCode === 13){
+            document.getElementById("button").click();
+        }
+    })
+
+
+    domBtm.addEventListener("click",function(){
+        var str=message.value;
+        var str1="ok";
+        var date=new Date();
+        var hour=date.getHours();
+        var mm=date.getMinutes();
+        var time=hour+':'+mm;
+        var ans= '<div class="chat_right_item_1 clearfix">你</div>'+
+            '<div class="chat_right_item_2">'+
+            '<div class="chat_right_time clearfix">'+time+'</div>'+
+            '<div class="chat_right_content clearfix">'+str+'</div>'
+            +'</div>';
+        var oLi=document.createElement("div");
+        oLi.setAttribute("class","chat_right clearfix");
+        oLi.setAttribute("id",time);
+        oLi.innerHTML=ans;
+        send_message.append(oLi);
+        document.getElementById(time).scrollIntoView();
+
+        var ans1='<div class="chat_left_item_1 clearfix">chatGPT</div>'+
+            '<div class="chat_left_item_2">'+
+            '<div class="chat_left_time clearfix">'+time+'</div>'+
+            '<div class="chat_left_content clearfix"><img src="/images/loading.gif" width="30px" height="30px"></div>'
+            +'</div>';
+        var oLi1=document.createElement("div");
+        oLi1.setAttribute("class","chat_left clearfix");
+        oLi1.setAttribute("id",time);
+        oLi1.innerHTML=ans1;
+        send_message.append(oLi1);
+        document.getElementById(time).scrollIntoView();
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/chat', true);
+        // var data = {"content": str};
+        xhr.send(str);
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                str1 = xhr.responseText.slice(2,-2);
+                console.log(str1);
+                str1 = str1.replace(/\\n/g, "<br>");
+                console.log(str1);
+                hour = date.getHours();
+                mm=date.getMinutes();
+                time=hour+':'+mm;
+                ans1='<div class="chat_left_item_1 clearfix">chatGPT</div>'+
+                    '<div class="chat_left_item_2">'+
+                    '<div class="chat_left_time clearfix">'+time+'</div>'+
+                    '<div class="chat_left_content clearfix">'+str1+'</div>'
+                    +'</div>';
+                // oLi1=document.createElement("div");
+                // oLi1.setAttribute("class","chat_left clearfix");
+                oLi1.setAttribute("id",time);
+                oLi1.innerHTML=ans1;
+                send_message.append(oLi1);
+                document.getElementById(time).scrollIntoView();
+            } else {
+                console.log('Error: ' + xhr.status);
+            }
+        };
+
+        message.value="";
+
+
+
+
+    });
+
+</script>
+</body>
+</html>

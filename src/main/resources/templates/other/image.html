@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+    <style>
+        body {
+            font-family: Arial;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        form.example input[type=text] {
+            padding: 10px;
+            font-size: 17px;
+            border: 1px solid grey;
+            float: left;
+            width: 80%;
+            background: #f1f1f1;
+        }
+
+        form.example div {
+            float: left;
+            width: 20%;
+            padding: 10px;
+            background: #2196F3;
+            color: white;
+            font-size: 17px;
+            border: 1px solid grey;
+            border-left: none;
+            cursor: pointer;
+        }
+
+        form.example div:hover {
+            background: #0b7dda;
+        }
+
+        form.example::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+    </style>
+</head>
+<body>
+
+<div>
+    <a href="/index" style="float: left"> 返回论坛主页</a>
+    <h2 style="text-align: center">输入你的绘画关键字或要求</h2>
+</div>
+
+<form class="example" style="margin:auto;max-width:70%" id="check_click">
+    <input type="text" placeholder="斑点狗......" id="image_context">
+    <div id="create_image"><i class="fa fa-search"></i>生成图片</div>
+<!--    <button id="create_image"><i class="fa fa-search"></i></button>-->
+</form>
+
+<hr/>
+
+<div id="my_image_div" style="text-align: center">
+
+</div>
+<script>
+    var check = document.getElementById("check_click");
+    var add =document.getElementById("my_image_div");
+    var create_image = document.getElementById("create_image");
+    var message=document.getElementById("image_context");
+    var index;
+
+    check.addEventListener("keyup",function (event){
+        event.preventDefault();
+        if(event.keyCode === 13){
+            document.getElementById("create_image").click();
+        }
+    })
+
+
+    create_image.addEventListener("click",function (){
+        var str = message.value;
+
+
+        var xhr1 = new XMLHttpRequest();
+        xhr1.open('POST', '/chatImage', true);
+        xhr1.send(str);
+        var ans1= "<img src ='/images/loading.gif' width='500px' height='500px'>"
+        add.innerHTML=ans1;
+        console.log(add);
+        xhr1.onload = function() {
+            console.log(xhr1.responseText);
+            if (xhr1.status === 200) {
+                var str1 = xhr1.responseText.slice(2,-2);
+                console.log(xhr1.responseText);
+                ans1= "<img src = '" + str1 + "' style='width: 50%;height: 50%;max-width: 400px'>"
+                // var oLi1=document.createElement("div");
+                // oLi1.innerHTML=ans1;
+                add.innerHTML=ans1;
+                console.log(str1);
+            } else {
+                alert('Error: ' + xhr.status);
+                console.log('Error: ' + xhr.status);
+            }
+        };
+        message.value=str;
+    })
+</script>
+
+</body>
+</html>
