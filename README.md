@@ -3,6 +3,9 @@
 
 主要技术：SpringBoot、SpringMVC、Mybatis、Thymeleaf、MySQL、Shiro、Layui
 
+项目开发环境：
+JDK1.8、 IDEA 2020.3、 Mysql 8.0、 gpt-3.5-turbo
+
 启动方法：
 
 1.在mysql中运行resource路径下的zl.sql文件,添加数据库及数据。

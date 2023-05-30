@@ -75,12 +75,6 @@
             <version>1.6.2</version>
         </dependency>
 
-<!--        &lt;!&ndash;   邮箱     &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-starter-mail</artifactId>-->
-<!--        </dependency>-->
-
         <!-- SPRINGBOOT DRUID -->
         <dependency>
             <groupId>com.alibaba</groupId>
